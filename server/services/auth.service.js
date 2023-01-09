@@ -1,3 +1,4 @@
+const userService = require("./user.service");
 const { User } = require("../models/user");
 
 const createUser = async (email, password) => {
@@ -21,4 +22,19 @@ const genAuthToken = (user) => {
   return token;
 };
 
-module.exports = { createUser, genAuthToken };
+const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    const user = await userService.findUserByEmail(email);
+    if (!user) {
+      throw new Error("Sorry BAD email");
+    }
+    if (!(await user.comparePassword(password))) {
+      throw new Error("Sorry BAD password");
+    }
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createUser, genAuthToken, signInWithEmailAndPassword };
