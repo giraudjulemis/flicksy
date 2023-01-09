@@ -12,7 +12,8 @@ const authController = {
         token,
       });
     } catch (error) {
-      res.status(httpStatus.BAD_REQUEST).send(error.message);
+      // res.status(httpStatus.BAD_REQUEST).send(error.message);
+      next(error);
     }
   },
   async signIn(req, res, next) {
@@ -28,7 +29,8 @@ const authController = {
         token,
       });
     } catch (error) {
-      res.status(httpStatus.BAD_REQUEST).send(error.message);
+      // res.status(httpStatus.BAD_REQUEST).send(error.message);
+      next(error);
     }
   },
 };
