@@ -1,6 +1,24 @@
-const getTest = async () => {
+const { User } = require("../models/user");
+
+const createUser = async (email, password) => {
   try {
-  } catch (error) {}
+    if (await User.emailTaken(email)) {
+      throw new Error("Sorry email taken");
+    }
+    const user = new User({
+      email,
+      password,
+    });
+    await user.save();
+    return user;
+  } catch (error) {
+    throw error;
+  }
 };
 
-module.exports = { getTest };
+const genAuthToken = (user) => {
+  const token = user.generateAuthToken();
+  return token;
+};
+
+module.exports = { createUser, genAuthToken };
