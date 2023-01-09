@@ -33,6 +33,9 @@ const authController = {
       next(error);
     }
   },
+  async isAuth(req, res, next) {
+    res.json(req.user);
+  },
 };
 
 module.exports = authController;
