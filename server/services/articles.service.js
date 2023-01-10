@@ -1,5 +1,4 @@
 const httpStatus = require("http-status");
-const { use } = require("passport");
 const { ApiError } = require("../middlewares/apiError");
 const { Article } = require("../models/article");
 
