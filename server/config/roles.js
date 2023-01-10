@@ -1,4 +1,5 @@
 const AccessControl = require("accesscontrol");
+const { all } = require("../routes");
 
 const allRights = {
   "create:any": ["*"],
@@ -9,11 +10,12 @@ const allRights = {
 
 let grantsObject = {
   admin: {
-    test: allRights,
+    profile: allRights,
   },
   user: {
-    test: {
-      "read:any": ["*"],
+    profile: {
+      "read:own": ["*", "!password", "!_id"],
+      "update:own": ["*"],
     },
   },
 };
