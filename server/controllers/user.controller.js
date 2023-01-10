@@ -1,6 +1,6 @@
 const httpStatus = require("http-status");
 const { ApiError } = require("../middlewares/apiError");
-const { userService, authService } = require("../services");
+const { userService, authService, emailService } = require("../services");
 
 const userController = {
   async getProfile(req, res, next) {
@@ -26,6 +26,7 @@ const userController = {
     try {
       const user = await userService.updateUserEmail(req);
       const token = await authService.genAuthToken(user);
+      await emailService.registerEmail(user.email, user);
       res.cookie("x-access-token", token).send({
         user: res.locals.permission.filter(user._doc),
         token,
