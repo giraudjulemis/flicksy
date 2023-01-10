@@ -9,4 +9,10 @@ router.post(
   articlesController.createArticle
 );
 
+router
+  .route("/article/:id")
+  .get(auth("readAny", "articles"), articlesController.getArticleById);
+
+router.route("/users/article/:id").get(articlesController.getUsersArticleById);
+
 module.exports = router;
