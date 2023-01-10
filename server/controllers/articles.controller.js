@@ -46,6 +46,22 @@ const articlesController = {
       next(error);
     }
   },
+  async getAllArticles(req, res, next) {
+    try {
+      const articles = await articlesService.getAllArticles(req);
+      res.json(articles);
+    } catch (error) {
+      next(error);
+    }
+  },
+  async getMoreArticles(req, res, next) {
+    try {
+      const articles = await articlesService.getMoreArticles(req);
+      res.json(articles);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = articlesController;
