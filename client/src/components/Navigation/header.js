@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SideDrawer from "./sideNavigation";
 
 const Header = () => {
   return (
@@ -9,6 +10,7 @@ const Header = () => {
       >
         Flicksy
       </Link>
+      <SideDrawer />
     </nav>
   );
 };
