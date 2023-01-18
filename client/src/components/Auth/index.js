@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { errorHelper } from "../../utils/helper";
+import { registerUser, signInUser } from "../../store/actions/users";
 import { Box, TextField, Button } from "@mui/material";
 
 const Auth = () => {
   const [register, setRegister] = useState(false);
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
   const formik = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: { email: "francis7@gmail.com", password: "testing123" },
     validationSchema: Yup.object({
       email: Yup.string()
         .required("Sorry email is required")
@@ -22,15 +26,15 @@ const Auth = () => {
 
   const handleSubmit = (values) => {
     if (register) {
-      console.log(values, "register");
+      dispatch(registerUser(values));
     } else {
-      console.log(values, "sign in");
+      dispatch(signInUser(values));
     }
   };
 
   return (
     <div className="auth_container">
-      <h1>Log In</h1>
+      <h1>{!register ? "Log in" : "Sign up"}</h1>
       <Box
         component="form"
         sx={{ "& .MuiTextField-root": { width: "100%", marginTop: "20px" } }}
@@ -68,7 +72,7 @@ const Auth = () => {
             size="small"
             onClick={() => setRegister(!register)}
           >
-            Want to {!register ? "Register" : "Login"}
+            Want to {!register ? "Register" : "Login"}?
           </Button>
         </div>
       </Box>
