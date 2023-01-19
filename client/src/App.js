@@ -3,6 +3,7 @@ import MainLayout from "./hoc/mainLayout";
 import Header from "./components/Navigation/header";
 import Home from "./components/Home";
 import Auth from "./components/Auth";
+import Dashboard from "./components/Dashboard";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Header />
       <MainLayout>
         <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<Home />} />
         </Routes>
