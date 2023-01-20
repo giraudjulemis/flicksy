@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotifications } from "../../store/reducers/notifications";
 import { showToast } from "../../utils/helper";
@@ -10,6 +10,7 @@ const Header = () => {
   const users = useSelector((state) => state.users);
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   useEffect(() => {
     let { global } = notifications;
@@ -27,6 +28,7 @@ const Header = () => {
 
   const signOutUser = () => {
     dispatch(signOut());
+    navigate("/");
   };
 
   return (

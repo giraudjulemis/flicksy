@@ -8,6 +8,7 @@ import Auth from "./components/Auth";
 import Dashboard from "./components/Dashboard";
 import { Loader } from "./utils/helper";
 import { isAuth } from "./store/actions/users";
+import AuthGuard from "./hoc/authGuard";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,14 @@ const App = () => {
           <Header />
           <MainLayout>
             <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <AuthGuard>
+                    <Dashboard />
+                  </AuthGuard>
+                }
+              />
               <Route path="/auth" element={<Auth />} />
               <Route path="/" element={<Home />} />
             </Routes>
