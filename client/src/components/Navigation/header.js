@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotifications } from "../../store/reducers/notifications";
 import { showToast } from "../../utils/helper";
+import { signOut } from "../../store/actions/users";
 import SideDrawer from "./sideNavigation";
 
 const Header = () => {
+  const users = useSelector((state) => state.users);
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
 
@@ -23,6 +25,10 @@ const Header = () => {
     }
   }, [notifications]);
 
+  const signOutUser = () => {
+    dispatch(signOut());
+  };
+
   return (
     <nav className="navbar fixed-top">
       <Link
@@ -31,7 +37,7 @@ const Header = () => {
       >
         Flicksy
       </Link>
-      <SideDrawer />
+      <SideDrawer users={users} signOutUser={signOutUser} />
     </nav>
   );
 };
