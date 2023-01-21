@@ -5,6 +5,12 @@ export const siteSlice = createSlice({
   initialState: {
     layout: "",
   },
+  reducers: {
+    setLayout: (state, action) => {
+      state.layout = action.payload;
+    },
+  },
 });
 
+export const { setLayout } = siteSlice.actions;
 export default siteSlice.reducer;
