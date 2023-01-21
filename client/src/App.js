@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import AdminArticles from "./components/Dashboard/Articles";
 import AdminProfile from "./components/Dashboard/Profile";
 import MainDashboard from "./components/Dashboard/main";
+import AddArticle from "./components/Dashboard/Articles/Add/add";
 import { Loader } from "./utils/helper";
 import { isAuth } from "./store/actions/users";
 import AuthGuard from "./hoc/authGuard";
@@ -48,6 +49,7 @@ const App = () => {
                 <Route index element={<MainDashboard />} />
                 <Route path="profile" element={<AdminProfile />} />
                 <Route path="articles" element={<AdminArticles />} />
+                <Route path="articles/add" element={<AddArticle />} />
               </Route>
               <Route path="/auth" element={<Auth />} />
               <Route path="/" element={<Home />} />
