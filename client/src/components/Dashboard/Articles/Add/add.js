@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { errorHelper, Loader } from "../../../../utils/helper";
 import { validation, formValues } from "../validationSchema";
+import { addArticle } from "../../../../store/actions/articles";
 import WYSIWYG from "../../../../utils/forms/wysiwyg";
 import { AdminTitle } from "../../../../utils/helper";
 
@@ -30,12 +31,18 @@ const AddArticle = () => {
   const dispatch = useDispatch();
   const actorsValue = useRef("");
 
+  let navigate = useNavigate();
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: formValues,
     validationSchema: validation,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(addArticle(values))
+        .unwrap()
+        .then(() => {
+          navigate("/dashboard/articles");
+        });
     },
   });
 
@@ -171,9 +178,13 @@ const AddArticle = () => {
           ) : null}
         </FormControl>
         <Divider className="mt-3 mb-3" />
-        <Button variant="contained" color="primary" type="submit">
-          Add article
-        </Button>
+        {articles.loading ? (
+          <Loader />
+        ) : (
+          <Button variant="contained" color="primary" type="submit">
+            Add article
+          </Button>
+        )}
       </form>
     </>
   );
