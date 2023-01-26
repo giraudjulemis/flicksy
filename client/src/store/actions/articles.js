@@ -56,3 +56,24 @@ export const updateArticle = createAsyncThunk(
     }
   }
 );
+
+export const getPaginateArticles = createAsyncThunk(
+  "articles/getPaginateArticles",
+  async ({ page = 1, limit = 5, keywords = "" }, { dispatch }) => {
+    try {
+      const request = await axios.post(
+        "/api/articles/admin/paginate",
+        {
+          page,
+          limit,
+          keywords,
+        },
+        getAuthHeader()
+      );
+      return request.data;
+    } catch (error) {
+      dispatch(errorGlobal(error.response.data.message));
+      throw error;
+    }
+  }
+);
