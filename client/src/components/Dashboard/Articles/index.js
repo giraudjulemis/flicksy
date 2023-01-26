@@ -13,12 +13,22 @@ import { AdminTitle } from "../../../utils/helper";
 import {
   getPaginateArticles,
   changeArticleStatus,
+  removeArticle,
 } from "../../../store/actions/articles";
 
 const AdminArticles = () => {
   const articles = useSelector((state) => state.articles);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [removeAlert, setRemoveAlert] = useState(false);
+  const [toRemove, setToRemove] = useState(null);
+
+  const handleModalClose = () => setRemoveAlert(false);
+
+  const handleModalShow = (id = null) => {
+    setToRemove(id);
+    setRemoveAlert(true);
+  };
 
   const goToPrevPage = (page) => {
     dispatch(getPaginateArticles({ page }));
@@ -35,6 +45,15 @@ const AdminArticles = () => {
   const handleStatusChange = (status, _id) => {
     let newStatus = status === "draft" ? "public" : "draft";
     dispatch(changeArticleStatus({ newStatus, _id }));
+  };
+
+  const handleDelete = () => {
+    dispatch(removeArticle(toRemove))
+      .unwrap()
+      .finally(() => {
+        setRemoveAlert(false);
+        setToRemove(null);
+      });
   };
 
   useEffect(() => {
@@ -65,8 +84,23 @@ const AdminArticles = () => {
             goToNextPage={(page) => goToNextPage(page)}
             goToEdit={(id) => goToEdit(id)}
             handleStatusChange={(status, id) => handleStatusChange(status, id)}
+            handleModalShow={(id) => handleModalShow(id)}
           />
         </>
+        <Modal show={removeAlert} onHide={handleModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure?</Modal.Title>
+            <Modal.Body>This process cannot be undone.</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleModalClose}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={() => handleDelete()}>
+                Delete
+              </Button>
+            </Modal.Footer>
+          </Modal.Header>
+        </Modal>
       </div>
     </>
   );
