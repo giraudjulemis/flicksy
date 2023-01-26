@@ -10,6 +10,7 @@ import AdminArticles from "./components/Dashboard/Articles";
 import AdminProfile from "./components/Dashboard/Profile";
 import MainDashboard from "./components/Dashboard/main";
 import AddArticle from "./components/Dashboard/Articles/Add/add";
+import EditArticle from "./components/Dashboard/Articles/Edit/edit";
 import { Loader } from "./utils/helper";
 import { isAuth } from "./store/actions/users";
 import AuthGuard from "./hoc/authGuard";
@@ -50,6 +51,10 @@ const App = () => {
                 <Route path="profile" element={<AdminProfile />} />
                 <Route path="articles" element={<AdminArticles />} />
                 <Route path="articles/add" element={<AddArticle />} />
+                <Route
+                  path="articles/edit/:articleId"
+                  element={<EditArticle />}
+                />
               </Route>
               <Route path="/auth" element={<Auth />} />
               <Route path="/" element={<Home />} />

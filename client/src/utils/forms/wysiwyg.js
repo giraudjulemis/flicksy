@@ -5,6 +5,7 @@ import { Editor } from "react-draft-wysiwyg";
 import htmlToDraft from "html-to-draftjs";
 import "../../styles/react-draft-wysiwyg.css";
 import { check } from "express-validator";
+import { htmlDecode } from "../helper";
 
 const WYSIWYG = (props) => {
   const [editorData, setEditorData] = useState({
@@ -18,6 +19,21 @@ const WYSIWYG = (props) => {
     });
     props.setEditorState(HTMLdata);
   };
+
+  useEffect(() => {
+    // console.log(htmlDecode(props.editorContent));
+    if (props.editorContent) {
+      const blockFromHTML = htmlToDraft(htmlDecode(props.editorContent));
+      const { contentBlocks, entityMap } = blockFromHTML;
+      const contentState = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+      setEditorData({
+        editorState: EditorState.createWithContent(contentState),
+      });
+    }
+  }, [props.editorContent]);
 
   const checkError = () => {
     if (props.onError || (props.onError && props.editorBlur)) {
