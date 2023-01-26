@@ -3,9 +3,8 @@ import { EditorState, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { Editor } from "react-draft-wysiwyg";
 import htmlToDraft from "html-to-draftjs";
-import "../../styles/react-draft-wysiwyg.css";
-import { check } from "express-validator";
 import { htmlDecode } from "../helper";
+import "../../styles/react-draft-wysiwyg.css";
 
 const WYSIWYG = (props) => {
   const [editorData, setEditorData] = useState({

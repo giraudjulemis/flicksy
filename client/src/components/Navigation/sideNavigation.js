@@ -4,16 +4,14 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import MailIcon from "@mui/icons-material/Mail";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import {
-  Box,
-  Drawer,
-  List,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListItemButton,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 import Home from "@mui/icons-material/Home";
 
 const SideDrawer = ({ users, signOutUser }) => {

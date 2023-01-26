@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { List, ListItem, ListItemText, ListItemButton } from "@mui/material";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 
 const AdminLayout = (props) => {
   const users = useSelector((state) => state.users);

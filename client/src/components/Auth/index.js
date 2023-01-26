@@ -6,7 +6,9 @@ import * as Yup from "yup";
 import { errorHelper, Loader } from "../../utils/helper";
 import { registerUser, signInUser } from "../../store/actions/users";
 import PreventSignIn from "../../hoc/preventSignIn";
-import { Box, TextField, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const Auth = () => {
   const [register, setRegister] = useState(false);
