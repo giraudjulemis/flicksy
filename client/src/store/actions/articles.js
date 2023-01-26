@@ -77,3 +77,28 @@ export const getPaginateArticles = createAsyncThunk(
     }
   }
 );
+
+export const changeArticleStatus = createAsyncThunk(
+  "article/changeArticleStatus",
+  async ({ newStatus, _id }, { dispatch, getState }) => {
+    try {
+      const request = await axios.patch(
+        `/api/articles/article/${_id}`,
+        {
+          status: newStatus,
+        },
+        getAuthHeader()
+      );
+      let article = request.data;
+      let state = getState().articles.adminArticles.docs;
+      let position = state.findIndex((article) => article._id === _id);
+      const newState = [...state];
+      newState[position] = article;
+      dispatch(successGlobal("Status changed"));
+      return newState;
+    } catch (error) {
+      dispatch(errorGlobal(error.response.data.message));
+      throw error;
+    }
+  }
+);

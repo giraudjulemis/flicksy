@@ -10,7 +10,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { LinkContainer } from "react-router-bootstrap";
 import { AdminTitle } from "../../../utils/helper";
-import { getPaginateArticles } from "../../../store/actions/articles";
+import {
+  getPaginateArticles,
+  changeArticleStatus,
+} from "../../../store/actions/articles";
 
 const AdminArticles = () => {
   const articles = useSelector((state) => state.articles);
@@ -27,6 +30,11 @@ const AdminArticles = () => {
 
   const goToEdit = (id) => {
     navigate(`/dashboard/articles/edit/${id}`);
+  };
+
+  const handleStatusChange = (status, _id) => {
+    let newStatus = status === "draft" ? "public" : "draft";
+    dispatch(changeArticleStatus({ newStatus, _id }));
   };
 
   useEffect(() => {
@@ -56,6 +64,7 @@ const AdminArticles = () => {
             goToPrevPage={(page) => goToPrevPage(page)}
             goToNextPage={(page) => goToNextPage(page)}
             goToEdit={(id) => goToEdit(id)}
+            handleStatusChange={(status, id) => handleStatusChange(status, id)}
           />
         </>
       </div>
