@@ -5,6 +5,7 @@ import MainLayout from "./hoc/mainLayout";
 import Header from "./components/Navigation/header";
 import Home from "./components/Home";
 import Auth from "./components/Auth";
+import Article from "./components/Articles/article";
 import Dashboard from "./components/Dashboard";
 import AdminArticles from "./components/Dashboard/Articles";
 import AdminProfile from "./components/Dashboard/Profile";
@@ -56,6 +57,7 @@ const App = () => {
                   element={<EditArticle />}
                 />
               </Route>
+              <Route path="/articles/article/:id" element={<Article />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/" element={<Home />} />
             </Routes>
