@@ -18,7 +18,7 @@ const Auth = () => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
-    initialValues: { email: "francis7@gmail.com", password: "testing123" },
+    initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
       email: Yup.string()
         .required("Sorry email is required")
