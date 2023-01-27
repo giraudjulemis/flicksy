@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ArticleCard from "../../utils/articleCard";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { loadMore } from "../../store/actions/articles";
@@ -26,12 +27,12 @@ const Home = () => {
         {articles && articles.articles
           ? articles.articles.map((item) => (
               <Grid key={item._id} item xs={12} sm={6} lg={3}>
-                {item.title}
+                <ArticleCard article={item} />
               </Grid>
             ))
           : null}
       </Grid>
-      <Divider />
+      <Divider className="mt-3 mb-3" />
       <Button variant="outlined" onClick={getNextArticles}>
         Load More
       </Button>
