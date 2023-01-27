@@ -36,7 +36,7 @@ const Header = () => {
       showToast("SUCCESS", msg);
       dispatch(clearNotifications());
     }
-  }, [notifications]);
+  }, [dispatch, notifications]);
 
   const signOutUser = () => {
     dispatch(signOut());

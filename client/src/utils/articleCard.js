@@ -1,4 +1,4 @@
-import { Link as RouterLink, Route } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
