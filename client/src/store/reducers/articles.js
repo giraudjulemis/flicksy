@@ -3,12 +3,18 @@ import {
   addArticle,
   getPaginateArticles,
   changeArticleStatus,
+  loadMore,
 } from "../actions/articles";
 
 export const articlesSlice = createSlice({
   name: "articles",
   initialState: {
-    homeSort: {},
+    homeSort: {
+      sortby: "_id",
+      order: "desc",
+      limit: 4,
+      skip: 0,
+    },
     loading: false,
     articles: [],
     current: null,
@@ -38,6 +44,10 @@ export const articlesSlice = createSlice({
       })
       .addCase(changeArticleStatus.fulfilled, (state, action) => {
         state.adminArticles.docs = action.payload;
+      })
+      .addCase(loadMore.fulfilled, (state, action) => {
+        state.homeSort.skip = action.payload.sort.skip;
+        state.articles = action.payload.newState;
       });
   },
 });

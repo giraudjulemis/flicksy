@@ -117,3 +117,16 @@ export const removeArticle = createAsyncThunk(
     }
   }
 );
+
+export const loadMore = createAsyncThunk(
+  "articles/loadMore",
+  async (sort, { dispatch, getState }) => {
+    try {
+      const articles = await axios.post("/api/articles/all", sort);
+      const state = getState().articles.articles;
+      const prevState = [...state];
+      const newState = [...prevState, ...articles.data];
+      return { newState, sort };
+    } catch (error) {}
+  }
+);
